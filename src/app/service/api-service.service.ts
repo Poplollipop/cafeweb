@@ -14,7 +14,7 @@ export class ApiServiceService {
 
 
   signup(data: any) {
-    return this.http.post(this.url + "/user/signup", data,
+    return this.http.post(this.url + "user/signup", data,
       { headers: new HttpHeaders().set('Content-Type', 'application/json') })
   }
 }

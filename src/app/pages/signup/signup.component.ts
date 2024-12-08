@@ -1,18 +1,31 @@
-import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Component, signal } from '@angular/core';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ApiServiceService } from '../../service/api-service.service';
-import { MatDialogRef } from '@angular/material/dialog';
+import { MatDialogActions, MatDialogClose, MatDialogContent, MatDialogRef } from '@angular/material/dialog';
 import { NgxUiLoaderService } from 'ngx-ui-loader';
 import { ConstantsService } from '../../shared/constants.service';
 import { MatToolbar } from '@angular/material/toolbar';
 import { SnackbarService } from '../../service/snackbar.service';
-
-
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatIcon } from '@angular/material/icon';
+import { MatButton, MatIconButton } from '@angular/material/button';
+import { MatInput } from '@angular/material/input';
 @Component({
   selector: 'app-signup',
   imports: [
-    MatToolbar
+    MatToolbar,
+    MatFormFieldModule,
+    MatToolbarModule,
+    MatIcon,
+    MatIconButton,
+    MatDialogClose,
+    MatDialogContent,
+    MatInput,
+    ReactiveFormsModule,
+    MatDialogActions,
+    MatButton,
   ],
   templateUrl: './signup.component.html',
   styleUrl: './signup.component.scss'
@@ -33,7 +46,8 @@ export class SignupComponent {
     private ngxService: NgxUiLoaderService,
   ) { }
 
-  ngOnOnit() {
+  ngOnInit() {
+    
     this.signupInfo = this.fb.group({
       name: [null, [Validators.required, Validators.pattern(ConstantsService.nameRegex)]],
       email: [null, [Validators.required, Validators.pattern(ConstantsService.emailRegex)]],
@@ -41,6 +55,18 @@ export class SignupComponent {
       password: [null, [Validators.required]],
       confirmPassword: [null, [Validators.required]],
     })
+  }
+
+  hidePassword = signal(true);
+  clickEvent(event: MouseEvent) {
+    this.hidePassword.set(!this.hidePassword());
+    event.stopPropagation();
+  }
+
+  hideConfirmPassword = signal(true);
+  click(event: MouseEvent) {
+    this.hideConfirmPassword.set(!this.hideConfirmPassword());
+    event.stopPropagation();
   }
 
   validateInfo() {

@@ -26,7 +26,8 @@ export class HomepageComponent {
 
   signup() {
     const dialogConfig = new MatDialogConfig();
-    dialogConfig.width = "500px",
+    dialogConfig.width = "600px",
+    dialogConfig.height = "600px"
       this.dialog.open(SignupComponent, dialogConfig);
   }
 

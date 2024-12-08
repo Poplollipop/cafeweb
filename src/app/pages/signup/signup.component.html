@@ -1,3 +1,100 @@
 <mat-toolbar>
-    <span>My Application</span>
+    <span>註冊</span>
+    <button mat-icon-button mat-dialog-close>
+        <mat-icon>close</mat-icon>
+    </button>
 </mat-toolbar>
+<mat-dialog-content class="mat-text">
+    <form [formGroup]="signupInfo">
+        <div class="form-content">
+            <mat-form-field>
+                <mat-label>姓名</mat-label>
+                <input matInput formControlName="name" required>
+                @if(signupInfo.controls.name.touched && signupInfo.controls.name.hasError('required')){
+                <mat-error>
+                    <span>這是必要的欄位！</span>
+                </mat-error>
+                }
+                @if (signupInfo.controls.name.errors?.pattern) {
+                <mat-error>
+                    <span>不得輸入特殊字元！</span>
+                </mat-error>
+                }
+            </mat-form-field>
+
+            <mat-form-field>
+                <mat-label>電話號碼</mat-label>
+                <input matInput formControlName="contactNumber" required>
+                @if(signupInfo.controls.contactNumber.touched &&
+                signupInfo.controls.contactNumber.hasError('required')){
+                <mat-error>
+                    <span>這是必要的欄位！</span>
+                </mat-error>
+                }
+                @if (signupInfo.controls.contactNumber.errors?.pattern) {
+                <mat-error>
+                    <span>請輸入正確的電話號碼格式！</span>
+                </mat-error>
+                }
+            </mat-form-field>
+
+            <mat-form-field>
+                <mat-label>Email</mat-label>
+                <input matInput formControlName="email" required>
+                @if(signupInfo.controls.email.touched && signupInfo.controls.email.hasError('required')){
+                <mat-error>
+                    <span>這是必要的欄位！</span>
+                </mat-error>
+                }
+                @if (signupInfo.controls.email.errors?.pattern) {
+                <mat-error>
+                    <span>請輸入正確的Email格式！</span>
+                </mat-error>
+                }
+            </mat-form-field>
+
+            <mat-form-field>
+                <mat-label>密碼</mat-label>
+                <input matInput formControlName="password" [type]="hidePassword() ? 'password' : 'text'" required>
+                <button mat-icon-button matSuffix (click)="clickEvent($event)" [attr.aria-label]="'Hide password'"
+                    [attr.aria-pressed]="hidePassword()">
+                    <mat-icon>{{hidePassword() ? 'visibility_off' : 'visibility'}}</mat-icon>
+                </button>
+                @if(signupInfo.controls.password.touched && signupInfo.controls.password.hasError('required')){
+                <mat-error>
+                    <span>這是必要的欄位！</span>
+                </mat-error>
+                }
+            </mat-form-field>
+
+            <mat-form-field>
+                <mat-label>再次輸入密碼</mat-label>
+                <input matInput formControlName="confirmPassword" [type]="hideConfirmPassword() ? 'password' : 'text'"
+                    required>
+                <button mat-icon-button matSuffix (click)="click($event)" [attr.aria-label]="'Hide confirmPassword'"
+                    [attr.aria-pressed]="hideConfirmPassword()">
+                    <mat-icon>{{hideConfirmPassword() ? 'visibility_off' : 'visibility'}}</mat-icon>
+                </button>
+                @if(signupInfo.controls.confirmPassword.touched &&
+                signupInfo.controls.confirmPassword.hasError('required')){
+                <mat-error>
+                    <span>這是必要的欄位！</span>
+                </mat-error>
+                }
+                @if(validateInfo() && !(signupInfo.controls.confirmPassword.invalid)){
+                <mat-hint>密碼輸入有誤，請確認密碼是否正確！</mat-hint>
+                }
+            </mat-form-field>
+        </div>
+    </form>
+</mat-dialog-content>
+
+<mat-dialog-actions>
+    <button mat-raised-button type="submit" (click)="submit()"
+        [disabled]="validateInfo() || !(signupInfo.valid && signupInfo.dirty)">
+        <mat-icon>save</mat-icon> 註冊
+    </button>
+    <button mat-raised-button mat-dialog-close>
+        <mat-icon>cancel</mat-icon> 關閉
+    </button>
+</mat-dialog-actions>
