@@ -6,6 +6,10 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatDialog, MatDialogConfig, MatDialogModule } from '@angular/material/dialog';
 import { SignupComponent } from '../signup/signup.component';
 import { NgxUiLoaderModule } from 'ngx-ui-loader';
+import { ForgotPasswordComponent } from '../forgot-password/forgot-password.component';
+import { MatTooltipModule } from '@angular/material/tooltip';
+
+
 @Component({
   selector: 'app-homepage',
   imports: [
@@ -15,7 +19,8 @@ import { NgxUiLoaderModule } from 'ngx-ui-loader';
     MatToolbarModule,
     MatButtonModule,
     MatIconModule,
-    NgxUiLoaderModule
+    NgxUiLoaderModule,
+    MatTooltipModule
   ],
   templateUrl: './homepage.component.html',
   styleUrl: './homepage.component.scss'
@@ -29,6 +34,14 @@ export class HomepageComponent {
     dialogConfig.width = "600px",
     dialogConfig.height = "600px"
       this.dialog.open(SignupComponent, dialogConfig);
+  }
+
+
+  forgotPassowrd() {
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.width = "600px",
+    dialogConfig.height = "600px"
+      this.dialog.open(ForgotPasswordComponent, dialogConfig);
   }
 
 }

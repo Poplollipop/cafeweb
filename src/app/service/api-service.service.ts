@@ -17,4 +17,10 @@ export class ApiServiceService {
     return this.http.post(this.url + "user/signup", data,
       { headers: new HttpHeaders().set('Content-Type', 'application/json') })
   }
+
+  forgotPassword(data: any) {
+    return this.http.post(this.url + "user/forgotPassword", data,
+      { headers: new HttpHeaders().set('Content-Type', 'application/json') })
+  }
+
 }
