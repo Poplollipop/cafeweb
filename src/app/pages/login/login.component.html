@@ -1,1 +1,50 @@
-<p>login works!</p>
+<mat-toolbar>
+    <span>登入</span>
+    <button mat-icon-button mat-dialog-close>
+        <mat-icon>close</mat-icon>
+    </button>
+</mat-toolbar>
+
+<mat-dialog-content class="mat-text">
+    <form [formGroup]="loginform">
+        <div class="form-content">
+            <mat-form-field>
+                <mat-label>Email</mat-label>
+                <input matInput formControlName="email" required>
+                @if(loginform.controls.email.touched && loginform.controls.email.hasError('required')){
+                <mat-error>
+                    <span>這是必要的欄位！</span>
+                </mat-error>
+                }
+                @if (loginform.controls.email.errors?.pattern) {
+                <mat-error>
+                    <span>請輸入正確的Email格式！</span>
+                </mat-error>
+                }
+            </mat-form-field>
+
+            <mat-form-field>
+                <mat-label>密碼</mat-label>
+                <input matInput formControlName="password" [type]="hidePassword() ? 'password' : 'text'" required>
+                <button mat-icon-button matSuffix (click)="clickEvent($event)" [attr.aria-label]="'Hide password'"
+                    [attr.aria-pressed]="hidePassword()">
+                    <mat-icon>{{hidePassword() ? 'visibility_off' : 'visibility'}}</mat-icon>
+                </button>
+                @if(loginform.controls.password.touched && loginform.controls.password.hasError('required')){
+                <mat-error>
+                    <span>這是必要的欄位！</span>
+                </mat-error>
+                }
+            </mat-form-field>
+        </div>
+    </form>
+</mat-dialog-content>
+
+<mat-dialog-actions>
+    <button mat-raised-button type="submit" (click)="submit()">
+        <mat-icon>save</mat-icon> 登入
+    </button>
+    <button mat-raised-button mat-dialog-close>
+        <mat-icon>cancel</mat-icon> 關閉
+    </button>
+</mat-dialog-actions>

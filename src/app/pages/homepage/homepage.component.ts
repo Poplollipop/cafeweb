@@ -14,9 +14,6 @@ import { LoginComponent } from '../login/login.component';
 @Component({
   selector: 'app-homepage',
   imports: [
-    RouterOutlet,
-    RouterLinkActive,
-    RouterLink,
     MatToolbarModule,
     MatButtonModule,
     MatIconModule,
