@@ -8,6 +8,7 @@ import { SignupComponent } from '../signup/signup.component';
 import { NgxUiLoaderModule } from 'ngx-ui-loader';
 import { ForgotPasswordComponent } from '../forgot-password/forgot-password.component';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { LoginComponent } from '../login/login.component';
 
 
 @Component({
@@ -42,6 +43,13 @@ export class HomepageComponent {
     dialogConfig.width = "600px",
     dialogConfig.height = "600px"
       this.dialog.open(ForgotPasswordComponent, dialogConfig);
+  }
+
+  login() {
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.width = "600px",
+    dialogConfig.height = "600px"
+      this.dialog.open(LoginComponent, dialogConfig);
   }
 
 }
