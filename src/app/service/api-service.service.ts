@@ -28,4 +28,8 @@ export class ApiServiceService {
       { headers: new HttpHeaders().set('Content-Type', 'application/json') })
   }
 
+  checktoken() {
+    return this.http.get(this.url + "user/checkToken")
+  }
+
 }

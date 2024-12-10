@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { RouterOutlet, RouterLinkActive, RouterLink } from '@angular/router';
+import { RouterOutlet, RouterLinkActive, RouterLink, Router } from '@angular/router';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatToolbarModule } from '@angular/material/toolbar';
@@ -9,6 +9,8 @@ import { NgxUiLoaderModule } from 'ngx-ui-loader';
 import { ForgotPasswordComponent } from '../forgot-password/forgot-password.component';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { LoginComponent } from '../login/login.component';
+import { ApiServiceService } from '../../service/api-service.service';
+import { error } from 'console';
 
 
 @Component({
@@ -25,28 +27,41 @@ import { LoginComponent } from '../login/login.component';
 })
 export class HomepageComponent {
 
-  constructor(private dialog: MatDialog) { }
+  constructor(
+    private dialog: MatDialog,
+    private api: ApiServiceService,
+    private router: Router
+  ) { }
+
+  ngOnInit() {
+    this.api.checktoken().subscribe((res: any) => {
+      this.router.navigateByUrl('/cafe/dashboard');
+    },(error:any)=>{
+      console.log(error);
+
+    })
+  }
 
   signup() {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.width = "600px",
-    dialogConfig.height = "600px"
-      this.dialog.open(SignupComponent, dialogConfig);
+      dialogConfig.height = "600px"
+    this.dialog.open(SignupComponent, dialogConfig);
   }
 
 
   forgotPassowrd() {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.width = "600px",
-    dialogConfig.height = "600px"
-      this.dialog.open(ForgotPasswordComponent, dialogConfig);
+      dialogConfig.height = "600px"
+    this.dialog.open(ForgotPasswordComponent, dialogConfig);
   }
 
   login() {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.width = "600px",
-    dialogConfig.height = "600px"
-      this.dialog.open(LoginComponent, dialogConfig);
+      dialogConfig.height = "600px"
+    this.dialog.open(LoginComponent, dialogConfig);
   }
 
 }

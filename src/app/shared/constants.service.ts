@@ -18,7 +18,8 @@ export class ConstantsService {
   public static contactNumberRegex: string = "^[0-9]{10}$"
 
   // 變數
-
   public static error: string = "error"
+
+  public static unauth: string = "您並未授權於此操作！"
 
 }
