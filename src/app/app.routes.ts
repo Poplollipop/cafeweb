@@ -14,7 +14,7 @@ export const routes: Routes = [
       children: [
         {
           path: 'dashboard',
-          loadChildren: () => import('./pages/dashboard/dashboard.component').then(m => m.DashboardComponent),
+          loadComponent: () => import('./pages/dashboard/dashboard.component').then(m => m.DashboardComponent),
           canActivate:[RouteGuardService],
           data:{
             expectedRole:['admin','user']
