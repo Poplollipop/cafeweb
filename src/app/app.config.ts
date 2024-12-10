@@ -6,7 +6,8 @@ import { provideClientHydration, withEventReplay } from '@angular/platform-brows
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 
 import { NgxUiLoaderModule, NgxUiLoaderConfig, SPINNER, } from 'ngx-ui-loader';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClient, HttpClientModule } from '@angular/common/http';
+import { TokenCheckService } from './service/token-check.service';
 
 const ngx: NgxUiLoaderConfig = {
   text: "載入中...",
@@ -19,5 +20,13 @@ const ngx: NgxUiLoaderConfig = {
   hasProgressBar: false
 }
 export const appConfig: ApplicationConfig = {
-  providers: [importProvidersFrom(NgxUiLoaderModule.forRoot(ngx)), provideZoneChangeDetection({ eventCoalescing: true }), provideRouter(routes), provideClientHydration(withEventReplay()),importProvidersFrom(HttpClientModule), provideAnimationsAsync()]
+  providers: [
+    importProvidersFrom(NgxUiLoaderModule.forRoot(ngx)),
+    provideZoneChangeDetection({ eventCoalescing: true }),
+    provideRouter(routes),
+    provideClientHydration(withEventReplay()),
+    importProvidersFrom(HttpClientModule),
+    provideAnimationsAsync(),
+    HttpClientModule, { provide: HTTP_INTERCEPTORS, useClass: TokenCheckService, multi: true }
+  ]
 };

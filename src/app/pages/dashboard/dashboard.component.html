@@ -1,1 +1,35 @@
-<p>dashboard works!</p>
+<mat-card>
+    <b><span>主控台</span></b>
+</mat-card>
+<br>
+<div class="row">
+    <div class="column">
+        <div class="card">
+            <div class="container">
+                <h2 class="title">所有類別：</h2>
+                <h1 class="title">{{ data?.category }}</h1>
+                <p><button class="btn" [routerLink]="['/cafe/category']">觀看類別</button></p>
+            </div>
+        </div>
+    </div>
+
+    <div class="column">
+        <div class="card">
+            <div class="container">
+                <h2 class="title">所有商品：</h2>
+                <h1 class="title">{{ data?.product }}</h1>
+                <p><button class="btn" [routerLink]="['/cafe/product']">觀看商品</button></p>
+            </div>
+        </div>
+    </div>
+
+    <div class="column">
+        <div class="card">
+            <div class="container">
+                <h2 class="title">總金額：</h2>
+                <h1 class="title">{{ data?.bill }}</h1>
+                <p><button class="btn" [routerLink]="['/cafe/bill']">觀看帳單</button></p>
+            </div>
+        </div>
+    </div>
+</div>

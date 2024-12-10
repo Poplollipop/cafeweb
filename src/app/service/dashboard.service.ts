@@ -15,6 +15,6 @@ export class DashboardService {
 
 
   getDetails(){
-    return this.http.get(this.url + "dashboard/details")
+    return this.http.get(this.url + "/details")
   }
 }

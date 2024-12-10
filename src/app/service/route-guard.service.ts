@@ -18,7 +18,7 @@ export class RouteGuardService {
   ) { }
 
 
-  actived(router: ActivatedRouteSnapshot): boolean {
+  canActivate(router: ActivatedRouteSnapshot): boolean {
     let expectedRoleArray = router.data;
     expectedRoleArray = expectedRoleArray['expectedRole'];
 
