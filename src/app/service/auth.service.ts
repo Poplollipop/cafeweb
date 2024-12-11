@@ -8,15 +8,14 @@ export class AuthService {
 
   constructor(
     private router: Router,
-    public auth:AuthService,
   ) { }
 
-  public isAuthed():boolean{
-    const token = localStorage.getItem("token");
-    if(token){
+  public isAuthed(): boolean {
+    const token = localStorage.getItem('token');
+    if (!token) {
       this.router.navigateByUrl('/');
       return false;
-    }else{
+    } else {
       return true;
     }
   }

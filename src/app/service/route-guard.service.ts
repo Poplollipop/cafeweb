@@ -22,7 +22,7 @@ export class RouteGuardService {
     let expectedRoleArray = router.data;
     expectedRoleArray = expectedRoleArray['expectedRole'];
 
-    const token: any = localStorage.getItem("token");
+    const token: any = localStorage.getItem('token');
 
     var tokenLoad: any;
 
@@ -49,7 +49,7 @@ export class RouteGuardService {
     } else {
       this.router.navigateByUrl('/');
       localStorage.clear();
-      return false
+      return false;
     }
   }
 }

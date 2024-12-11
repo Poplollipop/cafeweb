@@ -6,7 +6,7 @@ import { provideClientHydration, withEventReplay } from '@angular/platform-brows
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 
 import { NgxUiLoaderModule, NgxUiLoaderConfig, SPINNER, } from 'ngx-ui-loader';
-import { HTTP_INTERCEPTORS, HttpClient, HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClient, HttpClientModule, provideHttpClient, withFetch } from '@angular/common/http';
 import { TokenCheckService } from './service/token-check.service';
 
 const ngx: NgxUiLoaderConfig = {
@@ -24,6 +24,7 @@ export const appConfig: ApplicationConfig = {
     importProvidersFrom(NgxUiLoaderModule.forRoot(ngx)),
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(routes),
+    provideHttpClient(withFetch()),
     provideClientHydration(withEventReplay()),
     importProvidersFrom(HttpClientModule),
     provideAnimationsAsync(),

@@ -35,10 +35,11 @@ export class HomepageComponent {
 
   ngOnInit() {
     this.api.checktoken().subscribe((res: any) => {
+      console.log(res);
+
       this.router.navigateByUrl('/cafe/dashboard');
     },(error:any)=>{
       console.log(error);
-
     })
   }
 
