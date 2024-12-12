@@ -32,4 +32,9 @@ export class ApiServiceService {
     return this.http.get(this.url + "user/checkToken")
   }
 
+  changePassword(data: any){
+    return this.http.post(this.url + "user/changePassword", data,
+      { headers: new HttpHeaders().set('Content-Type', 'application/json') })
+  }
+
 }

@@ -1,5 +1,7 @@
 import { ChangeDetectorRef, Component, OnDestroy } from '@angular/core';
 import { MediaMatcher } from '@angular/cdk/layout';
+import { MenuItems } from '../../../shared/menu-items.service';
+import { jwtDecode } from 'jwt-decode';
 @Component({
   selector: 'app-sidebar',
   templateUrl: './sidebar.component.html',
@@ -7,13 +9,19 @@ import { MediaMatcher } from '@angular/cdk/layout';
 })
 export class AppSidebarComponent implements OnDestroy {
   mobileQuery: MediaQueryList;
+  userRole: any;
+  token: any = localStorage.getItem('token');
+  tokenLoad: any;
 
   private _mobileQueryListener: () => void;
 
   constructor(
     changeDetectorRef: ChangeDetectorRef,
-    media: MediaMatcher
+    media: MediaMatcher,
+    public menuitem: MenuItems
   ) {
+    this.tokenLoad = jwtDecode(this.token);
+    this.userRole = this.tokenLoad?.role;
     this.mobileQuery = media.matchMedia('(min-width: 768px)');
     this._mobileQueryListener = () => changeDetectorRef.detectChanges();
     this.mobileQuery.addListener(this._mobileQueryListener);
